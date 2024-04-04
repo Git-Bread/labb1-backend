@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="utf-8">
+        <title>Labboration 1</title>
+        <meta name="description" content="Labboration 1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.scss">
+        <script src="typescript.ts"></script>
+    </head>
+    <body>
+        <section>
+            <table>
+                <tr>
+                    <th id="head1">Kurskod</th>
+                    <th id="head2">Namn</th>
+                    <th id="head3">Progression</th>
+                    <th id="head4">Url</th>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <form>
+                <h2>Ny Kurs</h2>
+                <label for="code">Kurskod</label>
+                <input type="text" name="code" id="code">
+                <label for="newName">Kursnamn</label>
+                <input type="text" name="newName" id="newName">
+                <label for="progression">Progression</label>
+                <input type="text" name="progression" id="progression">
+                <label for="sylla">Syllabus</label>
+                <input type="text" name="sylla" id="sylla">
+                <div>
+                    <button type="button" id="newCourseSubmit">Ny Kurs</button>
+                    <button type="button" id="resetCourseNew">Rensa</button>
+                </div>
+            </form>
+            <form>
+                <h2>Uppdatera kurs</h2>
+                <label for="ucode">Kurskod</label>
+                <select name="ucode" id="ucode">
+                </select>
+                <label for="uname">Kursnamn</label>
+                <input type="text" name="uname" id="uname">
+                <label for="uprog">Progression</label>
+                <input type="text" name="uprog" id="uprog">
+                <label for="usyl">Syllabus</label>
+                <input type="text" name="usyl" id="usyl">
+                <div>
+                    <button type="button" id="updateCourseSubmit">Uppdatera Kurs</button>
+                    <button type="button" id="resetCourseUpdate">Rensa</button>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>
