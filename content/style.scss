@@ -1,8 +1,29 @@
 $color1: black;
+$linkcolor: rgb(53, 53, 251);
 $border: 1px solid $color1;
  
 
 body {
+    header {
+        display: flex;
+        border: $border;
+        justify-content: space-around;
+        margin-bottom: 1em;
+        a {
+            text-decoration: none;
+            color: $color1;
+            h2 {
+                margin: 0.5em;
+                #current {
+                    font-weight: bold;
+                }
+            }
+            h2:hover {
+                text-decoration: underline;
+                color: $linkcolor;
+            }
+        }
+    }
     section {
         width: 80%;
         margin: auto;

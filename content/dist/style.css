@@ -1,0 +1,78 @@
+body header {
+  display: flex;
+  border: 1px solid black;
+  justify-content: space-around;
+  margin-bottom: 1em;
+}
+body header a {
+  text-decoration: none;
+  color: black;
+}
+body header a h2 {
+  margin: 0.5em;
+}
+body header a h2 #current {
+  font-weight: bold;
+}
+body header a h2:hover {
+  text-decoration: underline;
+  color: #3535fb;
+}
+body section {
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2em;
+}
+body section table {
+  margin: auto;
+  width: 90%;
+  border: 1px solid black;
+}
+body section table th {
+  padding: 0.5em;
+  border: 1px solid black;
+}
+body section table #head1 {
+  width: 20%;
+}
+body section table #head2 {
+  width: 40%;
+}
+body section table #head3 {
+  width: 10%;
+}
+body section table #head4 {
+  width: 30%;
+}
+body section table td {
+  border: 1px solid black;
+  padding: 0.2em;
+}
+@media screen and (min-width: 1024px) {
+  body section {
+    display: flex;
+  }
+}
+body section form {
+  margin: auto;
+  margin-top: 1em;
+  width: 80%;
+  padding: 0.5em;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 1024px) {
+  body section form {
+    margin: 1em;
+  }
+}
+body section form input, body section form select, body section form option {
+  width: 80%;
+  margin-top: 0.2em;
+  border: 1px solid black;
+}
+body section form button {
+  width: 40%;
+  margin-top: 0.5em;
+}

@@ -5,13 +5,16 @@
   "source": "content/index.html",
   "scripts": {
     "run": "parcel",
-    "build": "parcel build"
+    "build": "parcel build",
+    "dev": "nodemon server.js"
   },
   "author": "Max Gagner (maga2101)",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.0",
     "parcel": "^2.12.0"
   },
   "devDependencies": {
