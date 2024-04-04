@@ -55,11 +55,17 @@ function create() {
 }
 
 function ask(question){
-    connection.query(question, function (error, result) {  
-        if (error) {
-            throw error;
+    return new Promise((resolve, reject) => {
+        try {
+            connection.query(question, function (error, result) {  
+                if (error) {
+                    return reject(error);
+                }
+                return resolve(result);
+                })   
+        } catch (e) {
+            reject(e)
         }
-        return result;
     })
 }
 
@@ -75,14 +81,20 @@ function debug() {
 
 
 //route
-app.get("/", function name(req, res) {
-    res.render("index");
+app.get("/", async function name(req, res) {
+    res.render("index", {
+        content: await ask("SELECT * FROM Course")
+    });
 })
 
-app.get("/add.ejs", function name(req, res) {
-    res.render("add");
+app.get("/add.ejs", async function name(req, res) {
+    res.render("add", {
+        content: await ask("SELECT * FROM Course")
+    });
 })
 
-app.get("/about.ejs", function name(req, res) {
-    res.render("about");
+app.get("/about.ejs", async function name(req, res) {
+    res.render("about", {
+        content: await ask("SELECT * FROM Course")
+    });
 })

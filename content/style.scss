@@ -25,7 +25,7 @@ body {
         }
     }
     section {
-        width: 80%;
+        width: 90%;
         margin: auto;
         margin-bottom: 2em;
         table  {
@@ -36,7 +36,8 @@ body {
                 padding: 0.5em;
                 border: $border;
             }
-            #head1 {width: 20%;}
+            #head0 {width: 5%;}
+            #head1 {width: 15%;}
             #head2 {width: 40%;}
             #head3 {width: 10%;}
             #head4 {width: 30%;}
