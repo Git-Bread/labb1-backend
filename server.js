@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const port = process.env.port | 3000;
-const address = "3.75.158.163" + port;
+const address = "3.75.158.163:" + port;
 
 app.set("view engine", "ejs");
 app.use(express.static("content"));
