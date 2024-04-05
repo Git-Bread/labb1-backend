@@ -2,7 +2,7 @@
   "name": "labb1_back",
   "version": "1.0.0",
   "description": "backend labb 1",
-  "source": "content/index.html",
+  "source": "server.js",
   "scripts": {
     "run": "parcel",
     "build": "parcel build",
