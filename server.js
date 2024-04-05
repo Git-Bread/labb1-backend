@@ -41,7 +41,7 @@ connection.connect();
 //connection.query("DROP TABLE IF EXISTS Course", function(error){if (error) {throw error;}})
 connection.query("CREATE TABLE IF NOT EXISTS Course (id Int NOT NULL PRIMARY KEY, coursecode varchar(8), coursename varchar(60), syllabus varchar(80), progression varchar(1))", function(error){if (error) {throw error;}})
 
-connection.query("SELECT id FROM Course WHERE id = 1", function(error, results) {
+connection.query("SELECT id FROM Course", function(error, results) {
     if (error) {
         throw error;
     }
@@ -49,7 +49,6 @@ connection.query("SELECT id FROM Course WHERE id = 1", function(error, results) 
     if (!results[0]) {
         create();
     }
-    debug();
 })
 
 function create() {
@@ -58,7 +57,6 @@ function create() {
     connection.query("INSERT Course VALUES (3,'DT200G','Grafisk teknik för webb','https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT200G/','A')",function(error){if (error) {throw error;}})
     connection.query("INSERT Course VALUES (4,'DT068G','Webbanvändbarhet','https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT068G/','B')",function(error){if (error) {throw error;}})
     connection.query("INSERT Course VALUES (5,'DT003G','Databaser','https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT003G/','A')",function(error){if (error) {throw error;}})   
-    console.log("ran")
 }
 
 function ask(question){
@@ -76,24 +74,19 @@ function ask(question){
     })
 }
 
-function debug() {
-    connection.query("SELECT COUNT(id) FROM course", function(error, results) {
-        if (error) {
-            throw error;
-        }
-        console.log(results);
-    });
-}
-
 async function newEntry(values){
-    let id = await ask("SELECT COUNT(id) AS idCount FROM course", function(error){if (error) {throw error;}})
-    let num = id[0].idCount;
-    num++;
-    console.log(values);
-
-    //connection.query("INSERT Course VALUES ("+"num"+"",'DT003G','Databaser','https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT003G/','A')",function(error){if (error) {throw error;}})   
+    connection.query("INSERT Course VALUES ('" + values.id + "','"+ values.code +"','"+ values.newName +"','"+ values.sylla + "','"+ values.progression +"')",function(error){if (error) {throw error;}})   
     return 0;
 }
+
+async function removeEntry(values){
+    if (!values.code) {
+        return 0;
+    }
+    connection.query("DELETE FROM Course WHERE id=" + values.code, function(error){if (error) {throw error;}})   
+    return 0;
+}
+
 
 //route get
 app.get("/", async function name(req, res) {
@@ -104,6 +97,12 @@ app.get("/", async function name(req, res) {
 
 app.post("/add",  async function name(req, res) {
     await newEntry(req.body);
+    res.redirect("/add.ejs");
+})
+
+app.post("/remove",  async function name(req, res) {
+    await removeEntry(req.body);
+    res.redirect("/");
 })
 
 app.get("/add.ejs", async function name(req, res) {

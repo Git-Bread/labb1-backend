@@ -1,18 +1,25 @@
 <%- include("head")%>
 <%- include("table")%>
 <section>
+    <script>
+        function checkform() {
+
+        }
+    </script>
     <form method="post" action="/add">
         <h2>Ny Kurs</h2>
+        <label for="id">Id</label>
+        <input type="number" name="id" id="id" maxlength="8" required>
         <label for="code">Kurskod</label>
-        <input type="text" name="code" id="code">
+        <input type="text" name="code" id="code" maxlength="60" required>
         <label for="newName">Kursnamn</label>
-        <input type="text" name="newName" id="newName">
+        <input type="text" name="newName" id="newName" maxlength="60" required>
         <label for="progression">Progression</label>
-        <input type="text" name="progression" id="progression">
+        <input type="text" name="progression" id="progression" maxlength="1" required>
         <label for="sylla">Syllabus</label>
-        <input type="text" name="sylla" id="sylla">
+        <input type="text" name="sylla" id="sylla" maxlength="80" required>
         <div>
-            <button type="submit" id="newCourseSubmit">Ny Kurs</button>
+            <button type="submit" id="newCourseSubmit" onsubmit="return checkform()">Ny Kurs</button>
             <button type="reset" id="resetCourseNew">Rensa</button>
         </div>
     </form>

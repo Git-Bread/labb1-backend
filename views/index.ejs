@@ -2,20 +2,16 @@
 <%- include("table")%>
 <section>
     <section>
-        <form method="post" action="/">
+        <form method="post" action="/remove">
             <h2>Ta Bort kurs</h2>
             <label for="ucode">Kurskod</label>
-            <select name="code" id="ucode">
+            <select name="code" id="ucode" required>
+                <% content.forEach(content => { %>
+                    <option><%= content.id %></option>
+                <%})%>
             </select>
-            <label for="uname">Kursnamn</label>
-            <input type="text" name="name" id="uname">
-            <label for="uprog">Progression</label>
-            <input type="text" name="prog" id="uprog">
-            <label for="usyl">Syllabus</label>
-            <input type="text" name="url" id="usyl">
             <div>
-                <button type="submit" id="updateCourseSubmit">Uppdatera Kurs</button>
-                <button type="reset" id="resetCourseUpdate">Rensa</button>
+                <button type="submit" id="updateCourseSubmit">Ta bort Kurs</button>
             </div>
         </form>
     </section>
