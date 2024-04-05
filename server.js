@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = process.env.port | 3000;
+const address = "3.75.158.163" + port;
 
 app.set("view engine", "ejs");
 app.use(express.static("content"));
@@ -18,7 +19,7 @@ app.listen(port, () => {console.log("running")});
 //sql
 const mysql = require('mysql');
 const initial = mysql.createConnection({
-    host: 'localhost',
+    host: address,
     user: 'root',
     password: ''
 });
@@ -30,7 +31,7 @@ initial.query("CREATE DATABASE IF NOT EXISTS Labb1Backend",function(error){if (e
 initial.end()
 
 const connection = mysql.createConnection({
-    host: 'localhost',
+    host: address,
     user: 'root',
     password: '',
     database: "Labb1Backend"
