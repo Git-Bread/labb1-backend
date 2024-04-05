@@ -24,8 +24,10 @@ body section {
   margin-bottom: 2em;
 }
 body section table {
+  width: 100%;
+  display: block;
+  overflow: scroll;
   margin: auto;
-  width: 90%;
   border: 1px solid black;
 }
 body section table th {

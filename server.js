@@ -4,9 +4,16 @@ const port = process.env.port | 3000;
 
 app.set("view engine", "ejs");
 app.use(express.static("content"));
+var bodyParser = require('body-parser');
+
+// configure the app to use bodyParser()
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
 
 app.listen(port, () => {console.log("running")});
-
 
 //sql
 const mysql = require('mysql');
@@ -78,13 +85,25 @@ function debug() {
     });
 }
 
+async function newEntry(values){
+    let id = await ask("SELECT COUNT(id) AS idCount FROM course", function(error){if (error) {throw error;}})
+    let num = id[0].idCount;
+    num++;
+    console.log(values);
 
+    //connection.query("INSERT Course VALUES ("+"num"+"",'DT003G','Databaser','https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT003G/','A')",function(error){if (error) {throw error;}})   
+    return 0;
+}
 
-//route
+//route get
 app.get("/", async function name(req, res) {
     res.render("index", {
         content: await ask("SELECT * FROM Course")
     });
+})
+
+app.post("/add",  async function name(req, res) {
+    await newEntry(req.body);
 })
 
 app.get("/add.ejs", async function name(req, res) {
@@ -95,6 +114,5 @@ app.get("/add.ejs", async function name(req, res) {
 
 app.get("/about.ejs", async function name(req, res) {
     res.render("about", {
-        content: await ask("SELECT * FROM Course")
     });
 })

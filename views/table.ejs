@@ -7,8 +7,14 @@
             <th id="head3">Progression</th>
             <th id="head4">Url</th>
         </tr>
-        <% content.forEach(element => { %>
-         
+        <% content.forEach(content => { %>
+            <tr>
+                <td><%= content.id %></td>
+                <td><%= content.coursecode %></td>
+                <td><%= content.coursename %></td>
+                <td><%= content.progression %></td>
+                <td><a href=<%= content.syllabus %>><%= content.syllabus %></a></td>
+            </tr>
         <% }) %>
     </table>
 </section>

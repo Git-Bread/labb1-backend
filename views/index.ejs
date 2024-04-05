@@ -1,35 +1,22 @@
 <%- include("head")%>
 <%- include("table")%>
 <section>
-    <form>
-        <h2>Ny Kurs</h2>
-        <label for="code">Kurskod</label>
-        <input type="text" name="code" id="code">
-        <label for="newName">Kursnamn</label>
-        <input type="text" name="newName" id="newName">
-        <label for="progression">Progression</label>
-        <input type="text" name="progression" id="progression">
-        <label for="sylla">Syllabus</label>
-        <input type="text" name="sylla" id="sylla">
-        <div>
-            <button type="button" id="newCourseSubmit">Ny Kurs</button>
-            <button type="button" id="resetCourseNew">Rensa</button>
-        </div>
-    </form>
-    <form>
-        <h2>Uppdatera kurs</h2>
-        <label for="ucode">Kurskod</label>
-        <select name="ucode" id="ucode">
-        </select>
-        <label for="uname">Kursnamn</label>
-        <input type="text" name="uname" id="uname">
-        <label for="uprog">Progression</label>
-        <input type="text" name="uprog" id="uprog">
-        <label for="usyl">Syllabus</label>
-        <input type="text" name="usyl" id="usyl">
-        <div>
-            <button type="button" id="updateCourseSubmit">Uppdatera Kurs</button>
-            <button type="button" id="resetCourseUpdate">Rensa</button>
-        </div>
-    </form>
+    <section>
+        <form method="post" action="/">
+            <h2>Ta Bort kurs</h2>
+            <label for="ucode">Kurskod</label>
+            <select name="code" id="ucode">
+            </select>
+            <label for="uname">Kursnamn</label>
+            <input type="text" name="name" id="uname">
+            <label for="uprog">Progression</label>
+            <input type="text" name="prog" id="uprog">
+            <label for="usyl">Syllabus</label>
+            <input type="text" name="url" id="usyl">
+            <div>
+                <button type="submit" id="updateCourseSubmit">Uppdatera Kurs</button>
+                <button type="reset" id="resetCourseUpdate">Rensa</button>
+            </div>
+        </form>
+    </section>
 </section>
