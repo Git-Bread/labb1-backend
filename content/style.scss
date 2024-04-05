@@ -72,5 +72,14 @@ body {
                 margin-top: 0.5em;
             }
         }
+        #about {
+            margin: auto;
+            border: $border;
+            padding: 1em;
+            p {
+                max-width: 60ch;
+                margin: 0.5em;
+            }
+        }
     }
 }

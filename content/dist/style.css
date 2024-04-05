@@ -81,3 +81,12 @@ body section form button {
   width: 40%;
   margin-top: 0.5em;
 }
+body section #about {
+  margin: auto;
+  border: 1px solid black;
+  padding: 1em;
+}
+body section #about p {
+  max-width: 60ch;
+  margin: 0.5em;
+}
