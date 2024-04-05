@@ -106,8 +106,16 @@ app.post("/remove",  async function name(req, res) {
 })
 
 app.get("/add.ejs", async function name(req, res) {
+    let cont = await ask("SELECT id FROM Course");
+    let numArr = [];
+
+    for (let index = 0; index < cont.length; index++) {
+        numArr.push(cont[index].id);
+    }
+
     res.render("add", {
-        content: await ask("SELECT * FROM Course")
+        content: await ask("SELECT * FROM Course"),
+        idnum: numArr
     });
 })
 

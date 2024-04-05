@@ -5,7 +5,7 @@
         <form method="post" action="/remove">
             <h2>Ta Bort kurs</h2>
             <label for="ucode">Kurskod</label>
-            <select name="code" id="ucode" required>
+            <select name="code" id="ucode">
                 <% content.forEach(content => { %>
                     <option><%= content.id %></option>
                 <%})%>
