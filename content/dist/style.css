@@ -1,8 +1,19 @@
+* {
+  font-size: clamp(1em, 3vh, 3em);
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
 body header {
+  background-color: #e8f9fd;
   display: flex;
   border: 1px solid black;
   justify-content: space-around;
   margin-bottom: 1em;
+  max-width: 100%;
 }
 body header a {
   text-decoration: none;
@@ -19,14 +30,14 @@ body header a h2:hover {
   color: #3535fb;
 }
 body section {
-  width: 90%;
+  width: clamp(200px, 80%, 800px);
   margin: auto;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 body section table {
   width: 100%;
   display: block;
-  overflow: scroll;
+  overflow: auto;
   margin: auto;
   border: 1px solid black;
 }
@@ -59,10 +70,11 @@ body section table td {
   }
 }
 body section form {
+  min-width: 100%;
+  background-color: #e8f9fd;
   margin: auto;
   margin-top: 1em;
-  width: 80%;
-  padding: 0.5em;
+  padding: 0.8em;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -73,20 +85,43 @@ body section form {
   }
 }
 body section form input, body section form select, body section form option {
-  width: 80%;
+  width: clamp(200px, 75%, 460px);
   margin-top: 0.2em;
   border: 1px solid black;
 }
 body section form button {
-  width: 40%;
+  width: clamp(200px, 40%, 300px);
   margin-top: 0.5em;
+  background-color: #ff1e00;
+  border-radius: 2em;
+  color: white;
+  border-color: white;
 }
-body section #about {
+body section form button:hover {
+  border-color: black;
+  color: #bfbfbf;
+}
+body #about {
+  width: clamp(200px, 80%, 1600px);
+}
+body #about div {
   margin: auto;
   border: 1px solid black;
   padding: 1em;
 }
-body section #about p {
-  max-width: 60ch;
+body #about div p {
+  max-width: 65ch;
+  font-size: clamp(1em, 3vh, 3em);
   margin: 0.5em;
+}
+body #tableSection {
+  width: clamp(200px, 80%, 2000px);
+}
+body footer {
+  height: 2em;
+  background-color: #e8f9fd;
+}
+body footer h5 {
+  margin-left: 1em;
+  text-align: justify;
 }
