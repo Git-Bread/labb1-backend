@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+
 app.listen(port, () => {console.log("running")});
 
 //sql
@@ -75,9 +76,59 @@ function ask(question){
 }
 
 async function newEntry(values){
+    let val = values.progression;
+    let pattern = /[a-c]/;
+    val = val.toLowerCase();
+
+    //progression check
+    //checks lenght of string
+    if (val.length > 1) {
+        return ("för lång progression, en symbol tack");
+    }
+    
+    //checks content of string
+    if (!pattern.test(val)) {
+        console.log(val);
+        console.log(pattern.test(val));
+        return ("invalid progression (a, b, c är correkta)");
+    }
+    values.progression = values.progression.toUpperCase();
+
+    let cont = await ask("SELECT id FROM Course");
+
+    //id check
+    for (let index = 0; index < cont.length; index++) {
+        if (cont[index].id == values.id) {
+            return ("invalidt Id, måste vara ett unikt id som inte används")
+        }
+    }
+
+    //name check
+    if (values.newName == "") {
+        return ("det måste finnas ett namn")
+    }
+
+    if (values.sylla == "") {
+        return ("det måste finnas en syllabus")
+    }
+
+    if (values.code == "") {
+        return ("det måste finnas en kurskod")
+    }
+
+
     connection.query("INSERT Course VALUES ('" + values.id + "','"+ values.code +"','"+ values.newName +"','"+ values.sylla + "','"+ values.progression +"')",function(error){if (error) {throw error;}})   
-    return 0;
+    return;
 }
+
+app.post("/add",  async function name(req, res) {
+    let val = await newEntry(req.body);
+    if (val != undefined) {
+        console.log(val);
+        return res.json({error: val});
+    }
+    res.redirect("/add.ejs");
+})
 
 async function removeEntry(values){
     if (!values.code) {
@@ -87,17 +138,11 @@ async function removeEntry(values){
     return 0;
 }
 
-
 //route get
 app.get("/", async function name(req, res) {
     res.render("index", {
         content: await ask("SELECT * FROM Course")
     });
-})
-
-app.post("/add",  async function name(req, res) {
-    await newEntry(req.body);
-    res.redirect("/add.ejs");
 })
 
 app.post("/remove",  async function name(req, res) {
@@ -115,7 +160,8 @@ app.get("/add.ejs", async function name(req, res) {
 
     res.render("add", {
         content: await ask("SELECT * FROM Course"),
-        idnum: numArr
+        idnum: numArr,
+        alert: null
     });
 })
 
@@ -123,3 +169,16 @@ app.get("/about.ejs", async function name(req, res) {
     res.render("about", {
     });
 })
+
+
+function idCheck(obj) {
+    var values = "<%= idnum %>";
+    for (let index = 0; index < values.length; index++) {
+        if (values[index] == obj.value) {
+            window.alert("måste vara ett nytt unikt id")
+            obj.value = "";
+            return false;
+        }
+    }
+    return true;
+}

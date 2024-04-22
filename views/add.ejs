@@ -1,5 +1,6 @@
 <%- include("head")%>
 <%- include("table")%>
+
 <section>
     <script>
         function idCheck(obj) {
@@ -16,7 +17,7 @@
         function validCheck(text) {
             let val = text.value;
             let pattern = /[a-c]/;
-            val.toLowerCase();
+            val = val.toLowerCase();
             //checks lenght of string
             if (val.length > 1) {
                 window.alert("för lång progression, en symbol tack");
@@ -38,13 +39,13 @@
     <form method="post" action="/add">
         <h2>Ny Kurs</h2>
         <label for="id">Id</label>
-        <input type="number" name="id" id="id" maxlength="8" onchange="idCheck(this)" required>
+        <input type="number" name="id" id="id" maxlength="8"  required>
         <label for="code">Kurskod</label>
         <input type="text" name="code" id="code" maxlength="60" required>
         <label for="newName">Kursnamn</label>
         <input type="text" name="newName" id="newName" maxlength="60" required>
         <label for="progression">Progression</label>
-        <input type="text" name="progression" id="progression" maxlength="1" onchange="validCheck(this)" required>
+        <input type="text" name="progression" id="progression" maxlength="1" required>
         <label for="sylla">Syllabus</label>
         <input type="text" name="sylla" id="sylla" maxlength="80" required>
         <div>
