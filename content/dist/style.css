@@ -70,7 +70,7 @@ body section table td {
   }
 }
 body section form {
-  min-width: 100%;
+  min-width: 80%;
   background-color: #e8f9fd;
   margin: auto;
   margin-top: 1em;
@@ -85,12 +85,12 @@ body section form {
   }
 }
 body section form input, body section form select, body section form option {
-  width: clamp(200px, 75%, 460px);
+  width: clamp(150px, 75%, 460px);
   margin-top: 0.2em;
   border: 1px solid black;
 }
 body section form button {
-  width: clamp(200px, 40%, 300px);
+  width: clamp(150px, 40%, 300px);
   margin-top: 0.5em;
   background-color: #ff1e00;
   border-radius: 2em;
