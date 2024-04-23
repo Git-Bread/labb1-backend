@@ -125,3 +125,11 @@ body footer h5 {
   margin-left: 1em;
   text-align: justify;
 }
+
+#error {
+  background-color: #f37e7e;
+  text-align: center;
+}
+#error p {
+  margin: auto;
+}

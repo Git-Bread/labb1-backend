@@ -76,58 +76,71 @@ function ask(question){
 }
 
 async function newEntry(values){
-    let val = values.progression;
-    let pattern = /[a-c]/;
-    val = val.toLowerCase();
-
-    //progression check
-    //checks lenght of string
-    if (val.length > 1) {
-        return ("för lång progression, en symbol tack");
-    }
-    
-    //checks content of string
-    if (!pattern.test(val)) {
-        console.log(val);
-        console.log(pattern.test(val));
-        return ("invalid progression (a, b, c är correkta)");
-    }
-    values.progression = values.progression.toUpperCase();
-
-    let cont = await ask("SELECT id FROM Course");
-
-    //id check
-    for (let index = 0; index < cont.length; index++) {
-        if (cont[index].id == values.id) {
-            return ("invalidt Id, måste vara ett unikt id som inte används")
-        }
-    }
-
-    //name check
-    if (values.newName == "") {
-        return ("det måste finnas ett namn")
-    }
-
-    if (values.sylla == "") {
-        return ("det måste finnas en syllabus")
-    }
-
-    if (values.code == "") {
-        return ("det måste finnas en kurskod")
-    }
-
-
-    connection.query("INSERT Course VALUES ('" + values.id + "','"+ values.code +"','"+ values.newName +"','"+ values.sylla + "','"+ values.progression +"')",function(error){if (error) {throw error;}})   
+    connection.query("INSERT Course VALUES ('" + values.id + "','"+ values.code +"','"+ values.newName +"','"+ values.sylla + "','"+ values.progression +"')",function(error){if (error) {throw error;}});
     return;
 }
 
-app.post("/add",  async function name(req, res) {
-    let val = await newEntry(req.body);
-    if (val != undefined) {
-        console.log(val);
-        return res.json({error: val});
+app.post("/validate", async function name(req, res) {
+    let errors = [];
+    let values = req.body;
+    let val = values.progression;
+    if (isNaN(val)) {
+        let pattern = /[a-c]/;
+        val = val.toLowerCase();
+        
+        //progression check
+        //checks lenght of string
+        if (val.length > 1) {
+            errors.push("För lång progression, en symbol tack");
+        }
+            
+        //checks content of string
+        if (!pattern.test(val)) {
+            console.log(val);
+            console.log(pattern.test(val));
+            errors.push("Invalid progression, a, b, c är correkta");
+        }
+        values.progression = values.progression.toUpperCase();
     }
-    res.redirect("/add.ejs");
+    else {
+        errors.push("Invalid progression, måste vara text");
+    }
+
+    let cont = await ask("SELECT id FROM Course");
+    
+    //id check
+    for (let index = 0; index < cont.length; index++) {
+        if (cont[index].id == values.id) {
+            errors.push("Invalidt Id, måste vara ett unikt id som inte används");
+            break;
+        }
+    }
+    
+    //name check
+    if (values.newName == "") {
+        errors.push("Det måste finnas ett namn")
+    }
+
+    if (values.sylla == "") {
+        errors.push("Det måste finnas en syllabus")
+    }
+
+    if (values.code == "") {
+        errors.push("Det måste finnas en kurskod")
+    }
+    console.log(errors);
+    // catch the error and return it's message to the client
+    if (!errors.length == 0) {
+        res.render("add", {
+            content: await ask("SELECT * FROM Course"),
+            error: errors
+        });   
+    }
+    else {
+        console.log("WHY")
+        await newEntry(req.body);
+        res.redirect("/add.ejs");
+    }
 })
 
 async function removeEntry(values){
@@ -151,17 +164,9 @@ app.post("/remove",  async function name(req, res) {
 })
 
 app.get("/add.ejs", async function name(req, res) {
-    let cont = await ask("SELECT id FROM Course");
-    let numArr = [];
-
-    for (let index = 0; index < cont.length; index++) {
-        numArr.push(cont[index].id);
-    }
-
     res.render("add", {
         content: await ask("SELECT * FROM Course"),
-        idnum: numArr,
-        alert: null
+        error: null
     });
 })
 
@@ -169,16 +174,3 @@ app.get("/about.ejs", async function name(req, res) {
     res.render("about", {
     });
 })
-
-
-function idCheck(obj) {
-    var values = "<%= idnum %>";
-    for (let index = 0; index < values.length; index++) {
-        if (values[index] == obj.value) {
-            window.alert("måste vara ett nytt unikt id")
-            obj.value = "";
-            return false;
-        }
-    }
-    return true;
-}

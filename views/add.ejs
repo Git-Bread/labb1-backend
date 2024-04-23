@@ -1,53 +1,21 @@
 <%- include("head")%>
 <%- include("table")%>
-
+<div id="error"><% if(error){error.forEach(error => { %>
+        <p><%= error%></td>
+<% })} %></div>
 <section>
-    <script>
-        function idCheck(obj) {
-            var values = "<%= idnum %>";
-            for (let index = 0; index < values.length; index++) {
-                if (values[index] == obj.value) {
-                    window.alert("måste vara ett nytt unikt id")
-                    obj.value = "";
-                    return false;
-                }
-            }
-            return true;
-        }
-        function validCheck(text) {
-            let val = text.value;
-            let pattern = /[a-c]/;
-            val = val.toLowerCase();
-            //checks lenght of string
-            if (val.length > 1) {
-                window.alert("för lång progression, en symbol tack");
-                text.value = "";
-                return false;
-            }
-            
-            //checks content of string
-            if (!pattern.test(val)) {
-                window.alert("invalid progression (a, b, c är correkta)");
-                text.value = "";
-                return false;
-            }
-            val = val.toUpperCase();
-            text.value = val;
-            return true;
-        }
-    </script>
-    <form method="post" action="/add">
+    <form method="post" action="/validate">
         <h2>Ny Kurs</h2>
         <label for="id">Id</label>
-        <input type="number" name="id" id="id" maxlength="8"  required>
+        <input type="number" name="id" id="id" maxlength="8"  >
         <label for="code">Kurskod</label>
-        <input type="text" name="code" id="code" maxlength="60" required>
+        <input type="text" name="code" id="code" maxlength="60" >
         <label for="newName">Kursnamn</label>
-        <input type="text" name="newName" id="newName" maxlength="60" required>
+        <input type="text" name="newName" id="newName" maxlength="60" >
         <label for="progression">Progression</label>
-        <input type="text" name="progression" id="progression" maxlength="1" required>
+        <input type="text" name="progression" id="progression" maxlength="1" >
         <label for="sylla">Syllabus</label>
-        <input type="text" name="sylla" id="sylla" maxlength="80" required>
+        <input type="text" name="sylla" id="sylla" maxlength="80" >
         <div>
             <button type="submit" id="newCourseSubmit">Ny Kurs</button>
             <button type="reset" id="resetCourseNew">Rensa</button>
